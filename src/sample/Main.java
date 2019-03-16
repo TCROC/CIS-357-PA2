@@ -11,10 +11,31 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.Random;
+
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        StockManager stockManager = new StockManager();
+
+        Random r = new Random();
+
+        for (int i=0; i<500; i++) {
+            int randomR = r.nextInt();
+            StockItem stockItem = null;
+
+            if (randomR > 0) {
+                Computer c = new Computer();
+                stockItem = c;
+            } else {
+                Apple a = new Apple();
+                stockItem = a;
+            }
+
+            stockManager.addItem(stockItem);
+        }
+
         BorderPane borderPane = new BorderPane();
 
         Text input1Label = new Text(" Number 1: ");

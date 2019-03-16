@@ -1,7 +1,7 @@
 package sample;
 
 public abstract class StockItem implements Comparable<StockItem>{
-    public double itemCount;
+    public static int itemCount;
     private String name;
     private double price;
     private boolean isOnSale;
@@ -10,7 +10,7 @@ public abstract class StockItem implements Comparable<StockItem>{
     protected String itemCategory;
 
     public StockItem() {
-
+        itemCount += 1;
     }
 
     public StockItem(String name) {
