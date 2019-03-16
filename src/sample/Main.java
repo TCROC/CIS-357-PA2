@@ -2,12 +2,18 @@ package sample;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -28,39 +34,40 @@ public class Main extends Application {
             if (randomR > 0) {
                 Computer c = new Computer();
                 stockItem = c;
+                c.setItemName("Computer");
             } else {
                 Apple a = new Apple();
                 stockItem = a;
+                a.setItemName("Apple");
             }
 
             stockManager.addItem(stockItem);
         }
 
-        BorderPane borderPane = new BorderPane();
+        VBox root = new VBox();
+        root.setSpacing(10);
+        root.setPadding(new Insets(10));
+        ScrollPane sp = new ScrollPane();
+        sp.setContent(root);
+        sp.setPannable(true);
 
-        Text input1Label = new Text(" Number 1: ");
-        Text input2Label = new Text(" Number 2: ");
-        Text resultLabel = new Text(" Result: ");
+        sp.setPrefWidth(500);
 
-        HBox hInputs = new HBox();
+        for (var stockItem: stockManager.getAllItems()) {
+            HBox box = new HBox(20);
+            box.getChildren().add(new Text(stockItem.getItemName()));
+            box.getChildren().add(new Button("Item Info"));
+            box.getChildren().add(new Button("Remove Item"));
+            root.getChildren().add(box);
+        }
 
-        Button btnAdd = new Button("Add");
-        Button btnSubtract = new Button("Subtract");
-        Button btnMultiply = new Button("Multiply");
-        Button btnDivide = new Button("Divide");
+        Pane pane = new Pane();
+        pane.getChildren().add(sp);
 
-        HBox hButtons = new HBox(20);
-        hButtons.getChildren().addAll(btnAdd, btnSubtract, btnMultiply, btnDivide);
+        sp.prefHeightProperty().bind(pane.heightProperty());
 
-        borderPane.setBottom(hButtons);
-        borderPane.setPrefSize(400, 400);
-        BorderPane.setAlignment(hInputs, Pos.CENTER);
-        BorderPane.setAlignment(hButtons, Pos.CENTER);
-
-        borderPane.setCenter(hInputs);
-
-        Scene scene = new Scene(borderPane);
-        primaryStage.setTitle("Rectangle Rotator");
+        Scene scene = new Scene(pane, 1000, 600);
+        primaryStage.setTitle("Stock Manager");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

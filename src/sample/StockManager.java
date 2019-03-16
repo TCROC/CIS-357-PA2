@@ -6,7 +6,7 @@ import java.util.Collections;
 
 public class StockManager {
 
-    private ArrayList<StockItem> stockItems;
+    private ArrayList<StockItem> stockItems = new ArrayList<>();
 
     public void addItem(StockItem item) {
         stockItems.add(item);
