@@ -66,6 +66,12 @@ public abstract class StockItem implements Comparable<StockItem>{
         return getItemSummary();
     }
 
+    @Override
+    public int compareTo(StockItem o) {
+        return (int) (o.getPrice() - price);
+    }
+
+
     public abstract String getItemTypeDetails();
     public abstract String getItemSummary();
 }
