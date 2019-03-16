@@ -1,16 +1,9 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -21,9 +14,13 @@ import java.util.Random;
 
 public class Main extends Application {
 
+    Stage secondaryWindow = null;
+    StockManager stockManager = new StockManager();
+
     @Override
     public void start(Stage primaryStage) throws Exception{
-        StockManager stockManager = new StockManager();
+        stockManager = new StockManager();
+        Pane rootPane = new Pane();
 
         Random r = new Random();
 
@@ -44,11 +41,26 @@ public class Main extends Application {
             stockManager.addItem(stockItem);
         }
 
-        VBox root = new VBox();
-        root.setSpacing(10);
-        root.setPadding(new Insets(10));
+        VBox mainVerticalPanel = new VBox();
+
+        ToolBar toolBar = new ToolBar();
+        Button addButton = new Button("Add Item");
+        addButton.setOnAction(i -> drawAddItemWindow(stockManager));
+        toolBar.getItems().add(addButton);
+
+        toolBar.prefWidthProperty().bind(mainVerticalPanel.widthProperty());
+
+        mainVerticalPanel.getChildren().add(toolBar);
+        mainVerticalPanel.prefHeightProperty().bind(rootPane.heightProperty());
+        mainVerticalPanel.prefWidthProperty().bind(rootPane.widthProperty());
+
+        rootPane.getChildren().add(mainVerticalPanel);
+
+        VBox itemsList = new VBox();
+        itemsList.setSpacing(10);
+        itemsList.setPadding(new Insets(10));
         ScrollPane sp = new ScrollPane();
-        sp.setContent(root);
+        sp.setContent(itemsList);
         sp.setPannable(true);
 
         sp.setPrefWidth(500);
@@ -56,17 +68,18 @@ public class Main extends Application {
         for (var stockItem: stockManager.getAllItems()) {
             HBox box = new HBox(20);
             box.getChildren().add(new Text(stockItem.getItemName()));
-            box.getChildren().add(new Button("Item Info"));
+            Button infoButton = new Button("Item Info");
+            infoButton.setOnAction(i -> drawItemSummaryWindow(stockItem));
+            box.getChildren().add(infoButton);
             box.getChildren().add(new Button("Remove Item"));
-            root.getChildren().add(box);
+            itemsList.getChildren().add(box);
         }
 
-        Pane pane = new Pane();
-        pane.getChildren().add(sp);
+        mainVerticalPanel.getChildren().add(sp);
 
-        sp.prefHeightProperty().bind(pane.heightProperty());
+        sp.prefHeightProperty().bind(rootPane.heightProperty());
 
-        Scene scene = new Scene(pane, 1000, 600);
+        Scene scene = new Scene(rootPane, 1000, 600);
         primaryStage.setTitle("Stock Manager");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -76,4 +89,51 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+    public void drawAddItemWindow(StockManager stockManager){
+        if (secondaryWindow != null)
+            secondaryWindow.close();
+
+        Computer computer = new Computer();
+
+        VBox pane = new VBox();
+
+        Text nameLabel = new Text("Name");
+        TextField nameTextArea = new TextField();
+        Text categoryLabel = new Text("Category");
+        TextField categoryTextArea = new TextField();
+        Text descriptionLabel = new Text("Description");
+        TextArea itemDescriptionTextArea = new TextArea();
+        Text priceLabel = new Text("Price");
+        TextField itemPriceTextField = new TextField();
+
+        Button addButton = new Button("Add");
+        addButton.setOnAction(i -> stockManager.addItem(computer));
+
+        pane.getChildren().addAll(nameLabel, nameTextArea, categoryLabel, categoryTextArea, descriptionLabel, itemDescriptionTextArea, priceLabel, itemPriceTextField, addButton);
+
+        secondaryWindow= new Stage();
+        secondaryWindow.setTitle("Add Item");
+        secondaryWindow.setScene(new Scene(pane, 450, 450));
+
+
+        secondaryWindow.show();
+    }
+
+    public void drawItemSummaryWindow(StockItem stockItem) {
+
+        if (secondaryWindow != null)
+            secondaryWindow.close();
+
+        Pane pane = new Pane();
+        Text info = new Text(stockItem.getItemSummary());
+
+        pane.getChildren().add(info);
+
+        secondaryWindow = new Stage();
+        secondaryWindow.setTitle("Item Summary: " + stockItem.getItemName());
+        secondaryWindow.setScene(new Scene(pane, 450, 450));
+        secondaryWindow.show();
+    }
+
 }
