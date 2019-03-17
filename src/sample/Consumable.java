@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -50,7 +49,7 @@ public abstract class Consumable extends StockItem {
     }
 
     @Override
-    public Node drawInfoFillInNode(Main main, StockManager stockManager, boolean isAddWindow) {
+    public Pane drawInfoFillInNode(Main main, StockManager stockManager, boolean isAddWindow) {
         VBox pane = (VBox) super.drawInfoFillInNode(main, stockManager, false);
 
         Text expirationDateLabel = new Text("Expiration Date");
@@ -70,7 +69,7 @@ public abstract class Consumable extends StockItem {
 
             if (isAddWindow) {
                 stockManager.addItem(this);
-                main.refreshItemsPane(stockManager);
+                main.drawUnsortedItemsPane(stockManager);
             }
         });
 

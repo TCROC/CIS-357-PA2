@@ -57,7 +57,9 @@ public class StockManager {
     }
 
     public ArrayList<StockItem> getCheapestItems() {
-        return null;
+        ArrayList<StockItem> items = new ArrayList<>(stockItems);
+        Collections.sort(items);
+        return items;
     }
 
     public ArrayList<StockItem> getMostExpensiveItemsByName(String itemName){

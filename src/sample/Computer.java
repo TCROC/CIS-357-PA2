@@ -3,14 +3,11 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 public class Computer extends NonConsumable {
 
@@ -77,7 +74,7 @@ public class Computer extends NonConsumable {
     }
 
     @Override
-    public Node drawInfoFillInNode(Main main, StockManager stockManager, boolean isAddWindow) {
+    public Pane drawInfoFillInNode(Main main, StockManager stockManager, boolean isAddWindow) {
         VBox pane = (VBox) super.drawInfoFillInNode(main, stockManager, false);
 
         Text processorLabel = new Text("Processor");
@@ -98,8 +95,8 @@ public class Computer extends NonConsumable {
             graphicsCard = graphicsCardTextField.getText();
 
             if (isAddWindow) {
-                stockManager.addItem(this);
-                main.refreshItemsPane(stockManager);
+                stockManager.addItem(new Computer(processor, memory, graphicsCard, getItemName(), getPrice(), isOnSale(), itemDescription, itemCategory));
+                main.drawUnsortedItemsPane(stockManager);
             }
         });
 

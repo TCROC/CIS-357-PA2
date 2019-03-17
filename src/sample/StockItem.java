@@ -4,6 +4,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -79,14 +80,14 @@ public abstract class StockItem implements Comparable<StockItem>{
 
     @Override
     public int compareTo(StockItem o) {
-        return (int) (o.getPrice() - price);
+        return Double.compare(o.getPrice(), price);
     }
 
 
     public abstract String getItemTypeDetails();
     public abstract String getItemSummary();
 
-    public Node drawInfoFillInNode(Main main, StockManager stockManager, boolean isAddWindow) {
+    public Pane drawInfoFillInNode(Main main, StockManager stockManager, boolean isAddWindow) {
         VBox pane = new VBox();
 
         Text nameLabel = new Text("Name");
@@ -109,7 +110,7 @@ public abstract class StockItem implements Comparable<StockItem>{
 
             if (isAddWindow) {
                 stockManager.addItem(this);
-                main.refreshItemsPane(stockManager);
+                main.drawUnsortedItemsPane(stockManager);
             }
         });
 

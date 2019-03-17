@@ -26,7 +26,14 @@ public class Main extends Application {
         ToolBar toolBar = new ToolBar();
         Button addButton = new Button("Add Item");
         addButton.setOnAction(i -> drawAddItemWindow(stockManager));
-        toolBar.getItems().add(addButton);
+
+        ComboBox<String> sortOrder = new ComboBox<>();
+        sortOrder.getItems().addAll("Unsorted", "Most Expensive");
+        sortOrder.setValue("Unsorted");
+        sortOrder.setOnAction(i -> drawItemsPain(sortOrder.getValue()));
+
+
+        toolBar.getItems().addAll(addButton, sortOrder);
 
         toolBar.prefWidthProperty().bind(mainVerticalPanel.widthProperty());
 
@@ -36,7 +43,7 @@ public class Main extends Application {
 
         rootPane.getChildren().add(mainVerticalPanel);
 
-        refreshItemsPane(stockManager);
+        drawUnsortedItemsPane(stockManager);
 
         mainVerticalPanel.getChildren().add(itemsPane);
 
@@ -48,9 +55,19 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public void drawItemsPain(String sortOrder){
+        switch (sortOrder){
+            case "Unsorted":
+                drawUnsortedItemsPane(stockManager);
+                break;
+            case "Most Expensive":
+                drawMostExpensiveItemsPane(stockManager);
+                break;
+        }
     }
 
     public void drawAddItemWindow(StockManager stockManager){
@@ -69,6 +86,8 @@ public class Main extends Application {
                 "Apple",
                 "Computer"
         );
+
+        comboBox.setValue("Select Item");
 
         scrollPane.prefHeightProperty().bind(mainPane.heightProperty());
         scrollPane.prefWidthProperty().bind(mainPane.widthProperty());
@@ -109,7 +128,7 @@ public class Main extends Application {
         secondaryWindow.show();
     }
 
-    public void refreshItemsPane(StockManager stockManager) {
+    public void drawUnsortedItemsPane(StockManager stockManager) {
         VBox itemsListPanel = new VBox();
 
         itemsListPanel.setSpacing(10);
@@ -128,7 +147,33 @@ public class Main extends Application {
             Button removeButton = new Button("Remove Item");
             removeButton.setOnAction(i -> {
                 stockManager.removeItem(stockItem);
-                refreshItemsPane(stockManager);
+                drawUnsortedItemsPane(stockManager);
+            });
+            box.getChildren().add(removeButton);
+            itemsListPanel.getChildren().add(box);
+        }
+    }
+
+    public void drawMostExpensiveItemsPane(StockManager stockManager) {
+        VBox itemsListPanel = new VBox();
+
+        itemsListPanel.setSpacing(10);
+        itemsListPanel.setPadding(new Insets(10));
+        itemsPane.setContent(itemsListPanel);
+        itemsPane.setPannable(true);
+
+        itemsPane.setPrefWidth(500);
+
+        for (var stockItem: stockManager.getMostExpensiveItems()) {
+            HBox box = new HBox(20);
+            box.getChildren().add(new Text(stockItem.getItemName()));
+            Button infoButton = new Button("Item Info");
+            infoButton.setOnAction(i -> drawItemSummaryWindow(stockItem));
+            box.getChildren().add(infoButton);
+            Button removeButton = new Button("Remove Item");
+            removeButton.setOnAction(i -> {
+                stockManager.removeItem(stockItem);
+                drawUnsortedItemsPane(stockManager);
             });
             box.getChildren().add(removeButton);
             itemsListPanel.getChildren().add(box);
