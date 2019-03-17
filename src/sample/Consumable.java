@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public abstract class Consumable extends StockItem {
@@ -41,7 +42,7 @@ public abstract class Consumable extends StockItem {
     }
 
     public Node drawInfoFillInNode(Main main, StockManager stockManager) {
-        Pane pane = (Pane) super.drawInfoFillInNode(main, stockManager);
+        VBox pane = (VBox) super.drawInfoFillInNode(main, stockManager);
 
         Text expirationDateLabel = new Text("Expiration Date");
         TextField dateTextField = new TextField();
