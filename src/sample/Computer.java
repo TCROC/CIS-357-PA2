@@ -32,16 +32,29 @@ public class Computer extends NonConsumable {
 
     @Override
     public String getItemTypeDetails() {
-        return null;
+        String details = "";
+        details += "Processor: " + getProcessor() + "\n";
+        details += "Memory: " + getMemory() + "\n";
+        details += "Graphics Card: " + getGraphicsCard() + "\n";
+        return details;
     }
 
     @Override
     public String getItemSummary() {
-        return null;
+        String summary = "";
+        summary += "Name: " + getItemName() + "\n";
+        summary += "Category: " + getItemCategory() + "\n";
+        summary += "Description: " + getItemDescription() + "\n";
+        summary += "Price: " + getPrice() + "\n";
+
+        summary += "\nDetails:\n";
+        summary += getItemTypeDetails();
+
+        return summary;
     }
 
     @Override
     public int compareTo(StockItem o) {
-        return 0;
+        return (int) (o.getPrice() - getPrice());
     }
 }

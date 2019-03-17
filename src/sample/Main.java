@@ -16,6 +16,7 @@ public class Main extends Application {
 
     Stage secondaryWindow = null;
     StockManager stockManager = new StockManager();
+    ScrollPane itemsPane = new ScrollPane();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -56,28 +57,11 @@ public class Main extends Application {
 
         rootPane.getChildren().add(mainVerticalPanel);
 
-        VBox itemsList = new VBox();
-        itemsList.setSpacing(10);
-        itemsList.setPadding(new Insets(10));
-        ScrollPane sp = new ScrollPane();
-        sp.setContent(itemsList);
-        sp.setPannable(true);
+        refreshItemsPane(stockManager);
 
-        sp.setPrefWidth(500);
+        mainVerticalPanel.getChildren().add(itemsPane);
 
-        for (var stockItem: stockManager.getAllItems()) {
-            HBox box = new HBox(20);
-            box.getChildren().add(new Text(stockItem.getItemName()));
-            Button infoButton = new Button("Item Info");
-            infoButton.setOnAction(i -> drawItemSummaryWindow(stockItem));
-            box.getChildren().add(infoButton);
-            box.getChildren().add(new Button("Remove Item"));
-            itemsList.getChildren().add(box);
-        }
-
-        mainVerticalPanel.getChildren().add(sp);
-
-        sp.prefHeightProperty().bind(rootPane.heightProperty());
+        itemsPane.prefHeightProperty().bind(rootPane.heightProperty());
 
         Scene scene = new Scene(rootPane, 1000, 600);
         primaryStage.setTitle("Stock Manager");
@@ -94,8 +78,6 @@ public class Main extends Application {
         if (secondaryWindow != null)
             secondaryWindow.close();
 
-        Computer computer = new Computer();
-
         VBox pane = new VBox();
 
         Text nameLabel = new Text("Name");
@@ -108,7 +90,17 @@ public class Main extends Application {
         TextField itemPriceTextField = new TextField();
 
         Button addButton = new Button("Add");
-        addButton.setOnAction(i -> stockManager.addItem(computer));
+
+        addButton.setOnAction(i ->
+        {
+            Computer computer = new Computer();
+            computer.setItemName(nameTextArea.getText());
+            computer.setItemCategory(categoryTextArea.getText());
+            computer.setItemDescription(itemDescriptionTextArea.getText());
+            computer.setPrice(Double.parseDouble(itemPriceTextField.getText()));
+            stockManager.addItem(computer);
+            refreshItemsPane(stockManager);
+        });
 
         pane.getChildren().addAll(nameLabel, nameTextArea, categoryLabel, categoryTextArea, descriptionLabel, itemDescriptionTextArea, priceLabel, itemPriceTextField, addButton);
 
@@ -119,7 +111,7 @@ public class Main extends Application {
 
         secondaryWindow.show();
     }
-
+    
     public void drawItemSummaryWindow(StockItem stockItem) {
 
         if (secondaryWindow != null)
@@ -136,4 +128,24 @@ public class Main extends Application {
         secondaryWindow.show();
     }
 
+    public void refreshItemsPane(StockManager stockManager) {
+        VBox itemsListPanel = new VBox();
+
+        itemsListPanel.setSpacing(10);
+        itemsListPanel.setPadding(new Insets(10));
+        itemsPane.setContent(itemsListPanel);
+        itemsPane.setPannable(true);
+
+        itemsPane.setPrefWidth(500);
+
+        for (var stockItem: stockManager.getAllItems()) {
+            HBox box = new HBox(20);
+            box.getChildren().add(new Text(stockItem.getItemName()));
+            Button infoButton = new Button("Item Info");
+            infoButton.setOnAction(i -> drawItemSummaryWindow(stockItem));
+            box.getChildren().add(infoButton);
+            box.getChildren().add(new Button("Remove Item"));
+            itemsListPanel.getChildren().add(box);
+        }
+    }
 }
