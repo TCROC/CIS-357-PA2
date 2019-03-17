@@ -105,7 +105,7 @@ public class Main extends Application {
 
         mainPane.getChildren().add(fieldFillOutPane);
 
-        secondaryWindow= new Stage();
+        secondaryWindow = new Stage();
         secondaryWindow.setTitle("Add Item");
         secondaryWindow.setScene(new Scene(mainPane, 450, 450));
         secondaryWindow.show();
