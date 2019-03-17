@@ -15,12 +15,12 @@ import javafx.stage.Stage;
 public class Computer extends NonConsumable {
 
     protected String processor;
-    protected double memory;
+    protected String memory;
     protected String graphicsCard;
 
     public Computer() {}
 
-    public Computer(String processor, double memory, String graphicsCard, String name, double price, boolean isOnSale, String itemDescription, String itemCategory) {
+    public Computer(String processor, String memory, String graphicsCard, String name, double price, boolean isOnSale, String itemDescription, String itemCategory) {
         super(name, price, isOnSale, itemDescription, itemCategory);
         this.processor = processor;
         this.memory = memory;
@@ -35,11 +35,11 @@ public class Computer extends NonConsumable {
         this.processor = processor;
     }
 
-    public double getMemory() {
+    public String getMemory() {
         return memory;
     }
 
-    public void setMemory(double memory) {
+    public void setMemory(String memory) {
         this.memory = memory;
     }
 
@@ -53,7 +53,7 @@ public class Computer extends NonConsumable {
 
     @Override
     public String getItemTypeDetails() {
-        String details = "";
+        String details = "\nDetails:\n";
         details += "Processor: " + getProcessor() + "\n";
         details += "Memory: " + getMemory() + "\n";
         details += "Graphics Card: " + getGraphicsCard() + "\n";
@@ -67,9 +67,6 @@ public class Computer extends NonConsumable {
         summary += "Category: " + getItemCategory() + "\n";
         summary += "Description: " + getItemDescription() + "\n";
         summary += "Price: " + getPrice() + "\n";
-
-        summary += "\nDetails:\n";
-        summary += getItemTypeDetails();
 
         return summary;
     }
@@ -97,7 +94,7 @@ public class Computer extends NonConsumable {
         {
             current.handle(i);
             processor = processorTextField.getText();
-            memory = Double.parseDouble(memoryTextField.getText());
+            memory = memoryTextField.getText();
             graphicsCard = graphicsCardTextField.getText();
 
             if (isAddWindow) {

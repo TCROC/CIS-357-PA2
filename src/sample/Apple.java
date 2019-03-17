@@ -31,12 +31,21 @@ public class Apple extends Consumable {
 
     @Override
     public String getItemTypeDetails() {
-        return null;
+
+        String details = super.getItemTypeDetails();
+        details += "Color: " + getColor() + "\n";
+        return details;
     }
 
     @Override
     public String getItemSummary() {
-        return null;
+        String summary = "";
+        summary += "Name: " + getItemName() + "\n";
+        summary += "Category: " + getItemCategory() + "\n";
+        summary += "Description: " + getItemDescription() + "\n";
+        summary += "Price: " + getPrice() + "\n";
+
+        return summary;
     }
 
     @Override

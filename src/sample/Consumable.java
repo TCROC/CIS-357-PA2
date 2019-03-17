@@ -19,6 +19,14 @@ public abstract class Consumable extends StockItem {
 
     }
 
+    @Override
+    public String getItemTypeDetails() {
+        String details = "\nDetails:\n";
+        details += "Expiration Date: " + expirationDate + "\n";
+        details += "Calorie Count: " + calorieCount + "\n";
+        return details;
+    }
+
     public Consumable(String expirationDate, double calorieCount, String name, double price, boolean isOnSale, String itemDescription, String itemCategory) {
         super(name, price, isOnSale, itemDescription, itemCategory);
         this.expirationDate = expirationDate;

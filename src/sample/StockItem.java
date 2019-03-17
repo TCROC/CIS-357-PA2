@@ -74,7 +74,7 @@ public abstract class StockItem implements Comparable<StockItem>{
 
     @Override
     public String toString() {
-        return getItemSummary();
+        return getItemSummary() + getItemTypeDetails();
     }
 
     @Override

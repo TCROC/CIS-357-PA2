@@ -10,8 +10,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.util.Random;
-
 public class Main extends Application {
 
     Stage secondaryWindow = null;
@@ -101,7 +99,7 @@ public class Main extends Application {
             secondaryWindow.close();
 
         Pane pane = new Pane();
-        Text info = new Text(stockItem.getItemSummary());
+        Text info = new Text(stockItem.toString());
 
         pane.getChildren().add(info);
 
