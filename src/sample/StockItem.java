@@ -86,7 +86,7 @@ public abstract class StockItem implements Comparable<StockItem>{
     public abstract String getItemTypeDetails();
     public abstract String getItemSummary();
 
-    public Node drawInfoFillInNode(Main main, StockManager stockManager) {
+    public Node drawInfoFillInNode(Main main, StockManager stockManager, boolean isAddWindow) {
         VBox pane = new VBox();
 
         Text nameLabel = new Text("Name");
@@ -102,12 +102,15 @@ public abstract class StockItem implements Comparable<StockItem>{
 
         addButton.setOnAction(j ->
         {
-            setItemName(nameTextArea.getText());
-            setItemCategory(categoryTextArea.getText());
-            setItemDescription(itemDescriptionTextArea.getText());
-            setPrice(Double.parseDouble(itemPriceTextField.getText()));
-            stockManager.addItem(this);
-            main.refreshItemsPane(stockManager);
+            name = nameTextArea.getText();
+            itemCategory = categoryTextArea.getText();
+            itemDescription = itemDescriptionTextArea.getText();
+            price = Double.parseDouble(itemPriceTextField.getText());
+
+            if (isAddWindow) {
+                stockManager.addItem(this);
+                main.refreshItemsPane(stockManager);
+            }
         });
 
         pane.getChildren().addAll(nameLabel, nameTextArea, categoryLabel, categoryTextArea, descriptionLabel, itemDescriptionTextArea, priceLabel, itemPriceTextField, addButton);

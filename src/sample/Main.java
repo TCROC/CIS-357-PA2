@@ -23,25 +23,6 @@ public class Main extends Application {
         stockManager = new StockManager();
         Pane rootPane = new Pane();
 
-        Random r = new Random();
-
-        for (int i=0; i<500; i++) {
-            int randomR = r.nextInt();
-            StockItem stockItem = null;
-
-            if (randomR > 0) {
-                Computer c = new Computer();
-                stockItem = c;
-                c.setItemName("Computer");
-            } else {
-                Apple a = new Apple();
-                stockItem = a;
-                a.setItemName("Apple");
-            }
-
-            stockManager.addItem(stockItem);
-        }
-
         VBox mainVerticalPanel = new VBox();
 
         ToolBar toolBar = new ToolBar();
@@ -80,30 +61,33 @@ public class Main extends Application {
 
         ComboBox<String> comboBox = new ComboBox<>();
 
+        ScrollPane scrollPane = new ScrollPane();
+
         VBox mainPane = new VBox();
 
         mainPane.getChildren().add(comboBox);
-
-        VBox fieldFillOutPane = new VBox();
 
         comboBox.getItems().addAll(
                 "Apple",
                 "Computer"
         );
 
+        scrollPane.prefHeightProperty().bind(mainPane.heightProperty());
+        scrollPane.prefWidthProperty().bind(mainPane.widthProperty());
+
         comboBox.valueProperty().addListener(i -> {
-            fieldFillOutPane.getChildren().clear();
+            //fieldFillOutPane.getChildren().clear();
             switch (comboBox.getValue()){
                 case "Apple":
-                    fieldFillOutPane.getChildren().add(new Apple().drawInfoFillInNode(this, stockManager));
+                    scrollPane.setContent(new Apple().drawInfoFillInNode(this, stockManager, true));
                     break;
                 case "Computer":
-                    fieldFillOutPane.getChildren().add(new Computer().drawInfoFillInNode(this, stockManager));
+                    scrollPane.setContent(new Computer().drawInfoFillInNode(this, stockManager, true));
                     break;
             }
         });
 
-        mainPane.getChildren().add(fieldFillOutPane);
+        mainPane.getChildren().add(scrollPane);
 
         secondaryWindow = new Stage();
         secondaryWindow.setTitle("Add Item");
@@ -143,7 +127,12 @@ public class Main extends Application {
             Button infoButton = new Button("Item Info");
             infoButton.setOnAction(i -> drawItemSummaryWindow(stockItem));
             box.getChildren().add(infoButton);
-            box.getChildren().add(new Button("Remove Item"));
+            Button removeButton = new Button("Remove Item");
+            removeButton.setOnAction(i -> {
+                stockManager.removeItem(stockItem);
+                refreshItemsPane(stockManager);
+            });
+            box.getChildren().add(removeButton);
             itemsListPanel.getChildren().add(box);
         }
     }

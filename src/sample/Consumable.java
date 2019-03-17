@@ -41,8 +41,9 @@ public abstract class Consumable extends StockItem {
         this.calorieCount = calorieCount;
     }
 
-    public Node drawInfoFillInNode(Main main, StockManager stockManager) {
-        VBox pane = (VBox) super.drawInfoFillInNode(main, stockManager);
+    @Override
+    public Node drawInfoFillInNode(Main main, StockManager stockManager, boolean isAddWindow) {
+        VBox pane = (VBox) super.drawInfoFillInNode(main, stockManager, false);
 
         Text expirationDateLabel = new Text("Expiration Date");
         TextField dateTextField = new TextField();
@@ -56,10 +57,13 @@ public abstract class Consumable extends StockItem {
         addButton.setOnAction(i ->
         {
             current.handle(i);
-            setExpirationDate(dateTextField.getText());
-            setCalorieCount(Double.parseDouble(categoryTextArea.getText()));
-            stockManager.addItem(this);
-            main.refreshItemsPane(stockManager);
+            expirationDate = dateTextField.getText();
+            calorieCount = Double.parseDouble(categoryTextArea.getText());
+
+            if (isAddWindow) {
+                stockManager.addItem(this);
+                main.refreshItemsPane(stockManager);
+            }
         });
 
         // Do this to make sure the add button is always at the bottom.
