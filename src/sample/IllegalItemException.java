@@ -1,6 +1,16 @@
+/**
+ * This meets the requirement of creating a custom exception.
+ *
+ * Properties:
+ * default message: The message to include in the exception.
+ *
+ * Methods:
+ * toString(): The message to output.
+ */
+
 package sample;
 
-public class IllegalItemException {
+public class IllegalItemException extends Throwable {
 
     String message = "";
 

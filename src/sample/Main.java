@@ -1,3 +1,20 @@
+/**
+ * Note: This class is used for displaying the StockManager.  To see how the requirements are met, please refer to other classes.
+ *
+ * Properties:
+ * default Stage secondaryWindow: this any window drawn besides the main window.
+ * default StockManager stockManager: this keeps track of all StockItems and has sorting / getting methods for the items.
+ * default ScrollPane itemsPane: this is a scroll pane for the items so that the window has scrolling capabilities.
+ *
+ * Methods:
+ * drawItemsPain (String sortOrder): Calls the correct method to draw the items based on the sort order passed in. i.e. Unsorted, Cheapest, Most Expensive, etc.
+ * drawAddItemWindow(StockManager stockManager): Draws the window for adding items to the StockManager and adds them as well.
+ * drawItemSummaryWindow(StockItem stockItem): Draws the window which outputs the summary for this particular item.
+ * drawUnsortedItemsPane(StockManager stockManager): Draws the items currently in the stock manager in the order they exist in the list.
+ * drawMostExpensiveItemsPane(StockManager stockManager): Draws items sorted in the order from most expensive to least expensive.
+ *
+ */
+
 package sample;
 
 import javafx.application.Application;
@@ -58,6 +75,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
 
     public void drawItemsPain(String sortOrder){
         switch (sortOrder){

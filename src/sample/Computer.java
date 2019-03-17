@@ -17,7 +17,7 @@ public class Computer extends NonConsumable {
 
     public Computer() {}
 
-    public Computer(String processor, String memory, String graphicsCard, String name, double price, boolean isOnSale, String itemDescription, String itemCategory) {
+    public Computer(String processor, String memory, String graphicsCard, String name, double price, boolean isOnSale, String itemDescription, String itemCategory) throws IllegalItemException {
         super(name, price, isOnSale, itemDescription, itemCategory);
         this.processor = processor;
         this.memory = memory;
@@ -95,8 +95,14 @@ public class Computer extends NonConsumable {
             graphicsCard = graphicsCardTextField.getText();
 
             if (isAddWindow) {
-                stockManager.addItem(new Computer(processor, memory, graphicsCard, getItemName(), getPrice(), isOnSale(), itemDescription, itemCategory));
-                main.drawUnsortedItemsPane(stockManager);
+                try {
+                    stockManager.addItem(new Computer(processor, memory, graphicsCard, getItemName(), getPrice(), isOnSale(), itemDescription, itemCategory));
+                } catch (IllegalItemException e) {
+
+                }
+                finally {
+                    main.drawUnsortedItemsPane(stockManager);
+                }
             }
         });
 

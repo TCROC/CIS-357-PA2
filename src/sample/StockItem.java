@@ -1,3 +1,33 @@
+/**
+ * Requirements met:
+ *      This is the superclass for all StockItems.
+ *      This class contains 2 abstract methods: getItemTypeDetails and getItemSummary.
+ *      This class extends the interface Comparable
+ *      This class has 1 public static property: itemCount.
+ *      This class has 3 private properties: price, isOnSale, and itemId.
+ *      This class has 2 protected properties: itemDescription, itemCategory.
+ *
+ * Properties:
+ *      public static int itemCount: this is the global count for all StockItem instances.
+ *      private String name: this is the name of the StockItem.
+ *      private double price: this is the price off the StockItem
+ *      private boolean isOnSale: this is a boolean for whether or not the StockItem is on sale.
+ *      private double itemId: this is the uniqueId for the StockItem.
+ *      protected String itemDescription: this is the description for the StockItem.
+ *      protected String itemCategory: this is the category the StockItem is associated with.
+ *
+ * Methods:
+ *      Each protected / private property has a getter and a setter following a naming convention such as:
+ *          private Double price;
+ *          public Double getPrice();
+ *          public void setPrice(double price);
+ *
+ *      compareTo(StockItem o): Allows for sorting collections by item price.
+ *      String getItemTypeDetails(): this is an abstract method meant to be implemented by sub classes and return details specific to this item.
+ *      String getItemSummary(): this is an abstract method meant to be implemented by sub classes and return a summary of the entire item, including the type details.
+ *      drawInfoFillInNode(Main main, StockManager stockManager, boolean isAddWindow): This draws the pane specific for filling out all info on this particular item.
+ */
+
 package sample;
 
 import javafx.scene.Node;
@@ -21,7 +51,11 @@ public abstract class StockItem implements Comparable<StockItem>{
         itemCount += 1;
     }
 
-    public StockItem(String name, double price, boolean isOnSale, String itemDescription, String itemCategory) {
+    public StockItem(String name, double price, boolean isOnSale, String itemDescription, String itemCategory) throws IllegalItemException {
+        super();
+        if (name == null || itemCategory == null || itemDescription == null) {
+            throw new IllegalItemException("The name, itemCategory, and itemDescription must be set when creating a new StockItem.");
+        }
         this.name = name;
         this.price = price;
         this.isOnSale = isOnSale;

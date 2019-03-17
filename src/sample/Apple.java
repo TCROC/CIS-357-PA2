@@ -17,7 +17,7 @@ public class Apple extends Consumable {
 
     }
 
-    public Apple(String color, String expirationDate, double calorieCount, String name, double price, boolean isOnSale, String itemDescription, String itemCategory) {
+    public Apple(String color, String expirationDate, double calorieCount, String name, double price, boolean isOnSale, String itemDescription, String itemCategory) throws IllegalItemException {
         super(expirationDate, calorieCount, name, price, isOnSale, itemDescription, itemCategory);
         this.color = color;
     }
@@ -71,8 +71,15 @@ public class Apple extends Consumable {
             color = colorTextField.getText();
 
             if (isAddWindow) {
-                stockManager.addItem(new Apple(color, getExpirationDate(), getCalorieCount(), getItemName(), getPrice(), isOnSale(), itemDescription, itemCategory));
-                main.drawUnsortedItemsPane(stockManager);
+                try {
+                    stockManager.addItem(new Apple(color, getExpirationDate(), getCalorieCount(), getItemName(), getPrice(), isOnSale(), itemDescription, itemCategory));
+                }
+                catch (IllegalItemException e){
+
+                    }
+                    finally {
+                    main.drawUnsortedItemsPane(stockManager);
+                }
             }
         });
 

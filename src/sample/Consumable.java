@@ -18,7 +18,7 @@ public abstract class Consumable extends StockItem {
 
     }
 
-    public Consumable(String expirationDate, double calorieCount, String name, double price, boolean isOnSale, String itemDescription, String itemCategory) {
+    public Consumable(String expirationDate, double calorieCount, String name, double price, boolean isOnSale, String itemDescription, String itemCategory) throws IllegalItemException {
         super(name, price, isOnSale, itemDescription, itemCategory);
         this.expirationDate = expirationDate;
         this.calorieCount = calorieCount;
