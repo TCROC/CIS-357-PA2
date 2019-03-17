@@ -78,40 +78,46 @@ public class Main extends Application {
         if (secondaryWindow != null)
             secondaryWindow.close();
 
-        VBox pane = new VBox();
+        ComboBox<String> comboBox = new ComboBox<>();
 
-        Text nameLabel = new Text("Name");
-        TextField nameTextArea = new TextField();
-        Text categoryLabel = new Text("Category");
-        TextField categoryTextArea = new TextField();
-        Text descriptionLabel = new Text("Description");
-        TextArea itemDescriptionTextArea = new TextArea();
-        Text priceLabel = new Text("Price");
-        TextField itemPriceTextField = new TextField();
+        VBox mainPane = new VBox();
 
-        Button addButton = new Button("Add");
+        mainPane.getChildren().add(comboBox);
 
-        addButton.setOnAction(i ->
-        {
-            Computer computer = new Computer();
-            computer.setItemName(nameTextArea.getText());
-            computer.setItemCategory(categoryTextArea.getText());
-            computer.setItemDescription(itemDescriptionTextArea.getText());
-            computer.setPrice(Double.parseDouble(itemPriceTextField.getText()));
-            stockManager.addItem(computer);
-            refreshItemsPane(stockManager);
+        VBox fieldFillOutPane = new VBox();
+
+        comboBox.getItems().addAll(
+                "Apple",
+                "Computer"
+        );
+
+        comboBox.valueProperty().addListener(i -> {
+            switch (comboBox.getValue()){
+                case "Apple":
+
+                    break;
+                case "Computer":
+                    Computer computer = new Computer();
+
+                    fieldFillOutPane.getChildren().clear();
+
+                    fieldFillOutPane.getChildren().add(computer.drawInfoFillInPanel(this, stockManager));
+                    break;
+            }
         });
 
-        pane.getChildren().addAll(nameLabel, nameTextArea, categoryLabel, categoryTextArea, descriptionLabel, itemDescriptionTextArea, priceLabel, itemPriceTextField, addButton);
+
+
+        mainPane.getChildren().add(fieldFillOutPane);
 
         secondaryWindow= new Stage();
         secondaryWindow.setTitle("Add Item");
-        secondaryWindow.setScene(new Scene(pane, 450, 450));
+        secondaryWindow.setScene(new Scene(mainPane, 450, 450));
 
 
         secondaryWindow.show();
     }
-    
+
     public void drawItemSummaryWindow(StockItem stockItem) {
 
         if (secondaryWindow != null)
