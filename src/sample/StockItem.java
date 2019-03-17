@@ -20,8 +20,12 @@ public abstract class StockItem implements Comparable<StockItem>{
         itemCount += 1;
     }
 
-    public StockItem(String name) {
+    public StockItem(String name, double price, boolean isOnSale, String itemDescription, String itemCategory) {
         this.name = name;
+        this.price = price;
+        this.isOnSale = isOnSale;
+        this.itemDescription = itemDescription;
+        this.itemCategory = itemCategory;
     }
 
     public String getItemName() {
