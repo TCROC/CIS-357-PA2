@@ -15,6 +15,15 @@ public class Computer extends NonConsumable {
     protected double memory;
     protected String graphicsCard;
 
+    public Computer() {}
+
+    public Computer(String processor, double memory, String graphicsCard, String name, double price, boolean isOnSale, String itemDescription, String itemCategory) {
+        super(name, price, isOnSale, itemDescription, itemCategory);
+        this.processor = processor;
+        this.memory = memory;
+        this.graphicsCard = graphicsCard;
+    }
+
     public String getProcessor() {
         return processor;
     }
