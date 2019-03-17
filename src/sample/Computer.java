@@ -67,33 +67,7 @@ public class Computer extends NonConsumable {
         return (int) (o.getPrice() - getPrice());
     }
 
-    public Node drawInfoFillInPanel(Main main, StockManager stockManager) {
-
-        VBox pane = new VBox();
-
-        Text nameLabel = new Text("Name");
-        TextField nameTextArea = new TextField();
-        Text categoryLabel = new Text("Category");
-        TextField categoryTextArea = new TextField();
-        Text descriptionLabel = new Text("Description");
-        TextArea itemDescriptionTextArea = new TextArea();
-        Text priceLabel = new Text("Price");
-        TextField itemPriceTextField = new TextField();
-
-        Button addButton = new Button("Add");
-
-        addButton.setOnAction(j ->
-        {
-            setItemName(nameTextArea.getText());
-            setItemCategory(categoryTextArea.getText());
-            setItemDescription(itemDescriptionTextArea.getText());
-            setPrice(Double.parseDouble(itemPriceTextField.getText()));
-            stockManager.addItem(this);
-            main.refreshItemsPane(stockManager);
-        });
-
-        pane.getChildren().addAll(nameLabel, nameTextArea, categoryLabel, categoryTextArea, descriptionLabel, itemDescriptionTextArea, priceLabel, itemPriceTextField, addButton);
-
-        return pane;
+    public Node drawInfoFillInNode(Main main, StockManager stockManager) {
+        return  super.drawInfoFillInNode(main, stockManager);
     }
 }

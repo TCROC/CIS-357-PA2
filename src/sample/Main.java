@@ -92,29 +92,22 @@ public class Main extends Application {
         );
 
         comboBox.valueProperty().addListener(i -> {
+            fieldFillOutPane.getChildren().clear();
             switch (comboBox.getValue()){
                 case "Apple":
-
+                    fieldFillOutPane.getChildren().add(new Apple().drawInfoFillInNode(this, stockManager));
                     break;
                 case "Computer":
-                    Computer computer = new Computer();
-
-                    fieldFillOutPane.getChildren().clear();
-
-                    fieldFillOutPane.getChildren().add(computer.drawInfoFillInPanel(this, stockManager));
+                    fieldFillOutPane.getChildren().add(new Computer().drawInfoFillInNode(this, stockManager));
                     break;
             }
         });
-
-
 
         mainPane.getChildren().add(fieldFillOutPane);
 
         secondaryWindow= new Stage();
         secondaryWindow.setTitle("Add Item");
         secondaryWindow.setScene(new Scene(mainPane, 450, 450));
-
-
         secondaryWindow.show();
     }
 

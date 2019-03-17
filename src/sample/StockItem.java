@@ -1,5 +1,12 @@
 package sample;
 
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+
 public abstract class StockItem implements Comparable<StockItem>{
     public static int itemCount;
     private String name;
@@ -74,4 +81,33 @@ public abstract class StockItem implements Comparable<StockItem>{
 
     public abstract String getItemTypeDetails();
     public abstract String getItemSummary();
+
+    public Node drawInfoFillInNode(Main main, StockManager stockManager) {
+        VBox pane = new VBox();
+
+        Text nameLabel = new Text("Name");
+        TextField nameTextArea = new TextField();
+        Text categoryLabel = new Text("Category");
+        TextField categoryTextArea = new TextField();
+        Text descriptionLabel = new Text("Description");
+        TextArea itemDescriptionTextArea = new TextArea();
+        Text priceLabel = new Text("Price");
+        TextField itemPriceTextField = new TextField();
+
+        Button addButton = new Button("Add");
+
+        addButton.setOnAction(j ->
+        {
+            setItemName(nameTextArea.getText());
+            setItemCategory(categoryTextArea.getText());
+            setItemDescription(itemDescriptionTextArea.getText());
+            setPrice(Double.parseDouble(itemPriceTextField.getText()));
+            stockManager.addItem(this);
+            main.refreshItemsPane(stockManager);
+        });
+
+        pane.getChildren().addAll(nameLabel, nameTextArea, categoryLabel, categoryTextArea, descriptionLabel, itemDescriptionTextArea, priceLabel, itemPriceTextField, addButton);
+
+        return pane;
+    }
 }
