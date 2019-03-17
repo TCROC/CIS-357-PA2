@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public abstract class Computer extends NonConsumable {
+public class Computer extends NonConsumable {
 
     protected String processor;
     protected String memory;
