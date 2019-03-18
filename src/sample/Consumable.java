@@ -1,3 +1,21 @@
+/**
+ * Requirements met:
+ *      This class is a sub class of StockItem.
+ *      This class has polymorphism by overriding 'public String getItemTypeDetails()' and 'public Pane drawInfoFillInNode(...)'
+ *
+ * Properties:
+ *      private String expirationDate: the data at which this item will expire.
+ *      private double calorieCount: the amount of calories are in this item.
+ *
+ * Methods:
+ *      public String getExpirationDate(): returns the 'expirationDate' for this item.
+ *      public void setExpirationDate(String expirationDate): sets the 'expirationDate' for this item.
+ *      public double getCalorieCount(): gets the 'calorieCount' for this item.
+ *      public void setCalorieCount(double calorieCount): sets the 'calorieCount' for this item.
+ *      public String getItemTypeDetails(): returns the type details specific to this item.
+ *      public Pane drawInfoFillInNode(Main main, StockManager stockManager, boolean isAddWindow): draws the pane for filling in info for this particular item.
+ */
+
 package sample;
 
 import javafx.event.ActionEvent;

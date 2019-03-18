@@ -1,3 +1,20 @@
+/**
+ * Requirements Met:
+ *      This is a subclass of Consumable.
+ *      This class has a protected property 'color'
+ *      This class demonstrates polymorphism by overriding 'getItemTypeDetails()', 'getItemSummary()', and 'drawInfoFillInNode(...)'
+ *
+ * Properties:
+ *      protected String color: the color of this particular apple.
+ *
+ * Methods:
+ *      public String getColor(): returns 'color' i.e. the color of this apple.
+ *      public void setColor(): sets 'color' i.e. the color of this apple.
+ *      public String getItemTypeDetails(): returns the details for this particular item.
+ *      public String getItemSummary(): returns the higher level summary of this particular item.
+ *      public Pane drawInfoFillInNode(Main main, StockManager stockManager, boolean isAddWindow): draws the pane for filling out info for this item.
+ */
+
 package sample;
 
 import javafx.event.ActionEvent;
@@ -47,11 +64,6 @@ public class Apple extends Consumable {
         summary += "Price: " + getPrice() + "\n";
 
         return summary;
-    }
-
-    @Override
-    public int compareTo(StockItem o) {
-        return 0;
     }
 
     @Override

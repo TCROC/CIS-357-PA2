@@ -1,6 +1,25 @@
 /**
  * Requirements Met:
- *      This class has a generic method 
+ *      This class has a generic method: 'public <T>ArrayList<T> getItemsByType(Class<T> type)'  It gets all items that are an instance of a particular type.
+ *
+ * Properties:
+ *      private ArrayList<StockItem> stockItems: This is a collection of all stock items managed by this StockManager.
+ *
+ * Methods:
+ *      public void addItem(StockItem item): this method adds a StockItem to 'stockItems'
+ *      public void removeItem(StockItem item): removes the StockItem 'item' from 'stockItems'
+ *      public ArrayList<StockItem> getAllItems(): returns the collection stockItems
+ *      public StockItem getItem(double itemId): returns the StockItem with the matching id from 'stockItems'
+ *      public ArrayList<StockItem> getItemsByName(String itemName): returns all StockItems with the matching name from 'stockItems'
+ *      public ArrayList<StockItem> getItemsByCategory(String itemCategory): returns all StockItems in the specified category from 'stockItems'
+ *      public ArrayList<StockItem> getMostExpensiveItems(): returns all StockItems sorted from most expensive to least expensive
+ *      public ArrayList<StockItem> getCheapestItems(): returns all StockItems sorted from least expensive ot most expensive
+ *      public ArrayList<StockItem> getMostExpensiveItemsByName(String itemName): returns all StockItems with the matching name from 'stockItems' sorted by most expensive to lest expensive
+ *      public ArrayList<StockItem> getCheapestItemsByName(): returns all StockItems with the matching name from 'stockItems' sorted by least expensive to most expensive
+ *      public ArrayList<StockItem> getMostExpensiveItemsByCategory(String itemCategory): returns all StockItems with the matching category from 'stockItems' sorted by most expensive to least expensive
+ *      public ArrayList<StockItem> getCheapestItemsByCategory(String itemCategory: returns all StockItems with the matching category from 'stockItems' sorted by least expensive to most expensive
+ *      public <T>ArrayList<T> getItemsByType(Class<T> type): returns a collection of all items that are an instance of the specified type 'T'
+ *      public String generateReport(): generates a report of all items currently managed by this StockManager
  */
 
 package sample;

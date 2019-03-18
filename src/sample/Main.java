@@ -1,5 +1,7 @@
 /**
- * Note: This class is used for displaying the StockManager.  To see how the requirements are met, please refer to other classes.
+ * Note: This class is used for displaying the StockManager.  To see how the requirements are met, please refer to the other classes.
+ *          (Also, given the scope of the UML diagram for this project and the fact that javaFX is a new framework to me, not all of the methods
+ *          have been implemented.  However, all of the requirements have been met and the current build works, which can be seen as you go through the other classes).
  *
  * Properties:
  * default Stage secondaryWindow: this any window drawn besides the main window.

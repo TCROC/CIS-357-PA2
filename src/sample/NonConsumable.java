@@ -1,3 +1,8 @@
+/**
+ * Requirements MetL
+ *      This is a subclass of StockItem
+ */
+
 package sample;
 
 public abstract class NonConsumable extends StockItem {

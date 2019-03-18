@@ -1,3 +1,27 @@
+/**
+ * Requirements met:
+ *      This is a subclass of NonConsumable
+ *      This class has a protected properties 'color', 'memory', and 'graphicsCard'
+ *      This class demonstrates polymorphism by overriding 'getItemTypeDetails()', 'getItemSummary()', and 'drawInfoFillInNode(...)'
+ *
+ * Properties:
+ *      protected String processor: the type of processor this computer has, i.e. i7, i5, etc.
+ *      protected String memory: the amount of memory in this computer, i.e. 1 TB HDD, 4 GB RAM
+ *      protected String graphicsCard: the graphics card this computer has, i.e. NVIDIA GTX 1080
+ *
+ * Methods:
+ *      public String getProcessor(): returns 'processor'
+ *      public String setProcessor(String processor): sets 'processor'
+ *      public String getMemory(): returns 'memory'
+ *      public String setMemory(String memory): sets 'memory'
+ *      public string getGraphicsCard(): returns 'graphicsCard'
+ *      public string setGraphicsCard(String graphicsCard): sets 'graphicsCard'
+ *      public String getItemTypeDetails(): returns the details for this particular item.
+ *      public String getItemSummary(): returns the higher level summary of this particular item.
+ *      public Pane drawInfoFillInNode(Main main, StockManager stockManager, boolean isAddWindow): draws the pane for filling out info for this item.
+ *
+ */
+
 package sample;
 
 import javafx.event.ActionEvent;
@@ -66,11 +90,6 @@ public class Computer extends NonConsumable {
         summary += "Price: " + getPrice() + "\n";
 
         return summary;
-    }
-
-    @Override
-    public int compareTo(StockItem o) {
-        return (int) (o.getPrice() - getPrice());
     }
 
     @Override

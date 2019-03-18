@@ -6,6 +6,7 @@
  *      This class has 1 public static property: itemCount.
  *      This class has 3 private properties: price, isOnSale, and itemId.
  *      This class has 2 protected properties: itemDescription, itemCategory.
+ *      This class demonstrates polymorphism by overriding the 'toString()' and 'compareTo(...)' methods.
  *
  * Properties:
  *      public static int itemCount: this is the global count for all StockItem instances.
@@ -15,6 +16,7 @@
  *      private double itemId: this is the uniqueId for the StockItem.
  *      protected String itemDescription: this is the description for the StockItem.
  *      protected String itemCategory: this is the category the StockItem is associated with.
+ *      public String toString(): overrides the Object's 'toString()' method and returns a combination of both the item summary and the item details.
  *
  * Methods:
  *      Each protected / private property has a getter and a setter following a naming convention such as:
@@ -24,7 +26,7 @@
  *
  *      compareTo(StockItem o): Allows for sorting collections by item price.
  *      String getItemTypeDetails(): this is an abstract method meant to be implemented by sub classes and return details specific to this item.
- *      String getItemSummary(): this is an abstract method meant to be implemented by sub classes and return a summary of the entire item, including the type details.
+ *      String getItemSummary(): this is an abstract method meant to be implemented by sub classes and return a higher level summary of the entire item
  *      drawInfoFillInNode(Main main, StockManager stockManager, boolean isAddWindow): This draws the pane specific for filling out all info on this particular item.
  */
 
