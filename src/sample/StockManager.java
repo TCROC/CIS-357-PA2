@@ -97,8 +97,15 @@ public class StockManager {
         return items;
     }
 
-    public ArrayList<StockItem> getCheapestItemsByName() {
-        return null;
+    public ArrayList<StockItem> getCheapestItemsByName(String itemName) {
+        ArrayList<StockItem> items = new ArrayList<>();
+
+        for(var item: stockItems) {
+            if (item.getItemName().equals(itemName))
+                items.add(item);
+        }
+        Collections.sort(items);
+        return items;
     }
 
     public ArrayList<StockItem> getMostExpensiveItemsByCategory(String itemCategory){
@@ -113,7 +120,14 @@ public class StockManager {
     }
 
     public ArrayList<StockItem> getCheapestItemsByCategory(String itemCategory){
-        return null;
+        ArrayList<StockItem> items = new ArrayList<>();
+
+        for(var item: stockItems) {
+            if (item.getItemCategory().equals(itemCategory))
+                items.add(item);
+        }
+        Collections.sort(items);
+        return items;
     }
 
     public <T>ArrayList<T> getItemsByType(Class<T> type) {
