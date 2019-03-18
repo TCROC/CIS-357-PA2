@@ -1,11 +1,12 @@
 /**
  * This meets the requirement of creating a custom exception.
+ * This meets the requirements of polymorphism by overriding the toString() method.
  *
  * Properties:
  * default message: The message to include in the exception.
  *
  * Methods:
- * toString(): The message to output.
+ * public String toString(): The message to output.
  */
 
 package sample;
@@ -22,6 +23,7 @@ public class IllegalItemException extends Throwable {
         this.message = message;
     }
 
+    @Override
     public String toString() {
         return "This item is illegal. Extra info: " + message;
     }

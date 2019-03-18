@@ -24,10 +24,10 @@
  *          public Double getPrice();
  *          public void setPrice(double price);
  *
- *      compareTo(StockItem o): Allows for sorting collections by item price.
- *      String getItemTypeDetails(): this is an abstract method meant to be implemented by sub classes and return details specific to this item.
- *      String getItemSummary(): this is an abstract method meant to be implemented by sub classes and return a higher level summary of the entire item
- *      drawInfoFillInNode(Main main, StockManager stockManager, boolean isAddWindow): This draws the pane specific for filling out all info on this particular item.
+ *      public int compareTo(StockItem o): Allows for sorting collections by item price.
+ *      public String getItemTypeDetails(): this is an abstract method meant to be implemented by sub classes and return details specific to this item.
+ *      public String getItemSummary(): this is an abstract method meant to be implemented by sub classes and return a higher level summary of the entire item
+ *      public Pane drawInfoFillInNode(Main main, StockManager stockManager, boolean isAddWindow): This draws the pane specific for filling out all info on this particular item.
  */
 
 package sample;
